@@ -1,2 +1,1 @@
-# Huffman
-Huffman Encoding 
+### Educational Huffman Encoder
