@@ -1,7 +1,7 @@
 import math
 import functools 
 import pprint
-import struct
+import pickle
 from collections import namedtuple
 
 # Taken from
@@ -49,7 +49,7 @@ def huffTree(weights):
 def convert(data,table):
     return functools.reduce(lambda acc,v: acc+table[v],data,'')
 
-def decode(data,table):
+def revert(data,table):
     str = ""
     while len(data) != 0:
         for k in table:
@@ -77,6 +77,8 @@ f.write(int_to_bytes(int(out,2)))
 
 d = bin(int_from_bytes(int_to_bytes(int(out,2)))).replace("b","")
 print(d)
-deco = decode(d,table)
+deco = revert(d,table)
 print(deco)
 print(deco == ini)
+
+pickle.dump(table,open("test.map","wb"))
