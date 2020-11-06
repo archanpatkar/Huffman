@@ -1,7 +1,6 @@
 import math
-import functools 
-import pprint
 import pickle
+import functools 
 from collections import namedtuple
 
 # Taken from
@@ -23,7 +22,7 @@ def sigmoid(x): return 1 / (1 + math.exp(-x))
 
 def calcProb(data):
     n = len(data.keys())
-    return {ch: sigmoid(data[ch]/n) for ch in data} 
+    return {ch:  sigmoid(data[ch]/n) for ch in data} 
 
 def calcEntropy(freq):
     return sum([-(freq[k] * math.log2(freq[k])) for k in freq])
@@ -31,10 +30,10 @@ def calcEntropy(freq):
 def prefixMap(node,prefix='',dict={}):
     if isinstance(node,Node):
         prefixMap(node.left,prefix+'0',dict)
-        prefixMap(node.right,prefix+'1',dict)
+        return prefixMap(node.right,prefix+'1',dict)
     else:
         dict[node.ch] = prefix
-    return dict    
+        return dict    
 
 def huffTree(weights):
     pq = [Leaf(ch,weights[ch]) for ch in weights]
@@ -64,10 +63,9 @@ lf = letterFreq("A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED")
 entropy = calcEntropy(calcProb(lf))
 print(entropy)
 tree = huffTree(lf)
-pprint.pprint(tree)
+print(tree)
 table = prefixMap(tree)
-pprint.pprint(table,indent=4)
-
+print(table)
 out = convert("A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED",table)
 print(out)
 
