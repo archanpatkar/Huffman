@@ -18,8 +18,6 @@ Node = namedtuple("Node",["prob","left","right"])
 def letterFreq(data):
     return {ch: data.count(ch) for ch in data} 
 
-def sigmoid(x): return 1 / (1 + math.exp(-x))
-
 def calcProb(data):
     n = sum(data.values())
     return {ch: data[ch]/n for ch in data} 
