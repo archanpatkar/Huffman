@@ -1,1 +1,1 @@
-Educational Huffman Encoder
+Huffman encoder/decoder
