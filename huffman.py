@@ -21,8 +21,8 @@ def letterFreq(data):
 def sigmoid(x): return 1 / (1 + math.exp(-x))
 
 def calcProb(data):
-    n = len(data.keys())
-    return {ch:  sigmoid(data[ch]/n) for ch in data} 
+    n = sum(data.values())
+    return {ch: data[ch]/n for ch in data} 
 
 def calcEntropy(freq):
     return sum([-(freq[k] * math.log2(freq[k])) for k in freq])
@@ -76,6 +76,7 @@ f.write(int_to_bytes(int(out,2)))
 d = bin(int_from_bytes(int_to_bytes(int(out,2)))).replace("b","")
 print(d)
 deco = revert(d,table)
+print("final")
 print(deco)
 print(deco == ini)
 
